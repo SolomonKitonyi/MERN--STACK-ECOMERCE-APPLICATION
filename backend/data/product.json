@@ -1,0 +1,74 @@
+[
+    {
+        "name":"SanDisk",
+        "price":"50.00",
+        "description":"A good one",
+        "ratings":4.5,
+        "images":[
+            {
+                "public_id":"products/tzfsnrli3szrdnb4jgge",
+                "url":"https://res.cloudinary.com/shopit/image/upload/v1606231282/products/tzfsnrli3szrdnb4jgge.jpg"
+            }
+        ],
+        "category":"Electronics",
+        "seller":"Ebay",
+        "stock":50,
+        "numOfReviews":32,
+        "reviews":[]
+    },
+    {
+        "name":"SanDisk",
+        "price":"50.00",
+        "description":"A good one",
+        "ratings":4.5,
+        "images":[
+            {
+                "public_id":"products/tzfsnrli3szrdnb4jgge",
+                "url":"https://res.cloudinary.com/shopit/image/upload/v1606231282/products/tzfsnrli3szrdnb4jgge.jpg"
+            }
+        ],
+        "category":"Electronics",
+        "seller":"Ebay",
+        "stock":50,
+        "numOfReviews":32,
+        "reviews":[]
+    },
+    {
+        "name":"SanDisk",
+        "price":"50.00",
+        "description":"A good one",
+        "ratings":4.5,
+        "images":[
+            {
+                "public_id":"products/tzfsnrli3szrdnb4jgge",
+                "url":"https://res.cloudinary.com/shopit/image/upload/v1606231282/products/tzfsnrli3szrdnb4jgge.jpg"
+            }
+        ],
+        "category":"Electronics",
+        "seller":"Ebay",
+        "stock":50,
+        "numOfReviews":32,
+        "reviews":[]
+    },
+    {
+        "name":"SanDisk",
+        "price":"50.00",
+        "description":"A good one",
+        "ratings":4.5,
+        "images":[
+            {
+                "public_id":"products/tzfsnrli3szrdnb4jgge",
+                "url":"https://res.cloudinary.com/shopit/image/upload/v1606231282/products/tzfsnrli3szrdnb4jgge.jpg"
+            },
+            {
+                "public_id":"products/tzfsnrli3szrdnb4jgge",
+                "url":"https://res.cloudinary.com/shopit/image/upload/v1606231282/products/tzfsnrli3szrdnb4jgge.jpg"
+            }
+        ],
+        "category":"Electronics",
+        "seller":"Ebay",
+        "stock":50,
+        "numOfReviews":32,
+        "reviews":[]
+    }
+]
