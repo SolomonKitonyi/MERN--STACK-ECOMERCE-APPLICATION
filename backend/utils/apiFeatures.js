@@ -15,6 +15,8 @@ class APIFEATURES {
     this.query = this.query.find({ ...keyword });
     return this;
   }
+  filter()
+  
 }
 
 module.exports = APIFEATURES;
