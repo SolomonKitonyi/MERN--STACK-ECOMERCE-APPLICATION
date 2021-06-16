@@ -14,6 +14,7 @@ const {
   updateProfile,
   allUsers,
   getUserDetails,
+  updateUser,
 } = require("../controllers/authController");
 
 router.route("/register").post(registerUser);
@@ -30,5 +31,6 @@ router
   .get(isAuthentictedUser, authorizeRoles("admin"), allUsers);
 router
   .route("/admin/user/:id")
-  .get(isAuthentictedUser, authorizeRoles("admin"), getUserDetails);
+  .get(isAuthentictedUser, authorizeRoles("admin"), getUserDetails)
+  .put(isAuthentictedUser, authorizeRoles("admin"), updateUser);
 module.exports = router;
