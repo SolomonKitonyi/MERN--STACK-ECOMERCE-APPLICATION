@@ -11,6 +11,7 @@ const {
   resetPassword,
   getUserProfile,
   updatePassword,
+  updateProfile,
 } = require("../controllers/authController");
 
 router.route("/register").post(registerUser);
@@ -20,4 +21,5 @@ router.route("/password/reset/:token").put(resetPassword);
 router.route("/logout").get(logout);
 router.route("/me").get(isAuthentictedUser, getUserProfile);
 router.route("/password/update").put(isAuthentictedUser, updatePassword);
+router.route("/me/update").put(isAuthentictedUser, updateProfile);
 module.exports = router;
