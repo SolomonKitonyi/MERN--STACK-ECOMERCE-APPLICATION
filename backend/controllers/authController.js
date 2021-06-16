@@ -212,9 +212,28 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHandler(`User not find with id: ${req.params.id}`, 404)
+      new ErrorHandler(`User not found with id: ${req.params.id}`, 404)
     );
   }
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+//Delete user  => /api/v1/admin/user/:id
+exports.deleteUser = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User not found with id: ${req.params.id}`, 404)
+    );
+  }
+
+  //Remove avatar from cloudinary :ToDo
+
+  await user.remove();
 
   res.status(200).json({
     success: true,
