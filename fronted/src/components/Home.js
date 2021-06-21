@@ -1,11 +1,14 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 
 import MetaData from "./layout/MetaData";
 import Product from "./product/Product";
+import Loader from "./layout/Loader";
 import { getProducts } from "../actions/productActions";
 
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
 
   const { loading, products, error, productsCount } = useSelector(
@@ -13,13 +16,16 @@ const Home = () => {
   );
 
   useEffect(() => {
+    if (error) {
+      return alert.error(error);
+    }
     dispatch(getProducts());
-  }, [dispatch]);
+  }, [dispatch, alert, error]);
 
   return (
     <Fragment>
       {loading ? (
-        <h1>Loading....</h1>
+        <Loader />
       ) : (
         <Fragment>
           <h1 id="products_heading">Latest Products</h1>
