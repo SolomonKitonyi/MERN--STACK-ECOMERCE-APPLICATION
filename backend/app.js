@@ -6,14 +6,14 @@ const app = express();
 const errorMiddleware = require("./middlewares/errors");
 
 app.use(express.json());
-app.use(bodyparse.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //Setting up cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_CLOUD_APIKEY,
-  api_secret: CLOUDINARY_CLOUD_SECRET,
+  api_secret: process.env.CLOUDINARY_CLOUD_SECRET,
 });
 
 //import all routes
