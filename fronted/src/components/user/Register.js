@@ -127,7 +127,7 @@ const Register = ({ history }) => {
                     accept="images/*"
                     onChange={onChange}
                   />
-                  <label className="custom-file-label" for="customFile">
+                  <label className="custom-file-label" htmlFor="customFile">
                     Choose Avatar
                   </label>
                 </div>
