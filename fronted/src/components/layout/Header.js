@@ -75,7 +75,7 @@ const Header = () => {
                     Dashboard
                   </Link>
                 )}
-                <Link className="dropdown-item" to="/me">
+                <Link to="/me" className="dropdown-item">
                   Profile
                 </Link>
                 <Link
