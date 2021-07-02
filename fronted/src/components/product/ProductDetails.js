@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { Carousel } from "react-bootstrap";
@@ -9,6 +9,7 @@ import MetaData from "../layout/MetaData";
 import { getProductDetails, clearErrors } from "../../actions/productActions";
 
 const ProductDetails = ({ match }) => {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
@@ -21,6 +22,21 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors);
     }
   }, [dispatch, alert, error, match.params.id]);
+
+  const increaseQty = () => {
+    const count = document.querySelector(".count");
+    if (count.valueAsNumber >= product.stock) return;
+    const qty = count.valueAsNumber + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQty = () => {
+    const count = document.querySelector(".count");
+    if (count.valueAsNumber <= 1) return;
+    const qty = count.valueAsNumber - 1;
+    setQuantity(qty);
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -64,16 +80,20 @@ const ProductDetails = ({ match }) => {
 
               <p id="product_price">Ksh {product.price}</p>
               <div className="stockCounter d-inline">
-                <span className="btn btn-danger minus">-</span>
+                <span className="btn btn-danger minus" onClick={decreaseQty}>
+                  -
+                </span>
 
                 <input
                   type="number"
                   className="form-control count d-inline"
-                  value="1"
+                  value={quantity}
                   readOnly
                 />
 
-                <span className="btn btn-primary plus">+</span>
+                <span className="btn btn-primary plus" onClick={increaseQty}>
+                  +
+                </span>
               </div>
               <button
                 type="button"
