@@ -16,6 +16,7 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassward from "./components/user/ForgotPassword";
 import ResetPassword from "./components/user/ResetPassword";
+import Cart from "./components/cart/Cart";
 
 function App() {
   useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
             component={ResetPassword}
             exact
           />
+          <Route path="/cart" component={Cart} exact />
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
           <ProtectedRoute
