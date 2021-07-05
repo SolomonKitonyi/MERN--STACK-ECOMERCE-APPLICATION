@@ -4,7 +4,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 
 import MetaData from "../layout/MetaData";
-import { addItemToCart } from "../../actions/cartActions";
+import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 
 const Cart = () => {
   const alert = useAlert();
@@ -23,11 +23,16 @@ const Cart = () => {
     dispatch(addItemToCart(id, newQty));
   };
 
+  const removeCartItemHandler = (id) => {
+    dispatch(removeItemFromCart(id));
+    alert.success("Item Successfully Removed from Cart");
+  };
+
   return (
     <Fragment>
       <MetaData title={"Your Cart"} />
-      {cartItems === 0 ? (
-        <h2 classNameName="mt-5">Your Cart is Empty</h2>
+      {cartItems.length === 0 ? (
+        <h2 className="mt-5">Your Cart is Empty</h2>
       ) : (
         <Fragment>
           <h2 className="mt-5">
@@ -42,7 +47,7 @@ const Cart = () => {
               {cartItems.map((item) => (
                 <Fragment>
                   <hr />
-                  <div className="cart-item">
+                  <div className="cart-item" key={item.product}>
                     <div className="row">
                       <div className="col-4 col-lg-3">
                         <img
@@ -99,6 +104,7 @@ const Cart = () => {
                         <i
                           id="delete_cart_item"
                           className="fa fa-trash btn btn-danger"
+                          onClick={() => removeCartItemHandler(item.product)}
                         ></i>
                       </div>
                     </div>
@@ -113,12 +119,26 @@ const Cart = () => {
                 <h4>Order Summary</h4>
                 <hr />
                 <p>
-                  Subtotal:{" "}
-                  <span className="order-summary-values">3 (Units)</span>
+                  Subtotal:
+                  <span className="order-summary-values">
+                    {cartItems.reduce(
+                      (acc, item) => acc + Number(item.quantity),
+                      0
+                    )}
+                    (Units)
+                  </span>
                 </p>
                 <p>
                   Est. total:{" "}
-                  <span className="order-summary-values">$765.56</span>
+                  <span className="order-summary-values">
+                    Ksh{" "}
+                    {cartItems
+                      .reduce(
+                        (acc, item) => acc + item.quantity * item.price,
+                        0
+                      )
+                      .toFixed(2)}
+                  </span>
                 </p>
 
                 <hr />
