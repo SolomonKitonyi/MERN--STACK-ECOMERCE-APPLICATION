@@ -20,13 +20,18 @@ import ResetPassword from "./components/user/ResetPassword";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
+import Payment from "./components/cart/Payment";
+
+//Payment
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
   useEffect(() => {
     Store.dispatch(loadUser());
     async function getStripeApiKey() {
-      const { data } = await axios.get("/api/v2/stripeapi");
+      const { data } = await axios.get("/api/v1/stripeapi");
       setStripeApiKey(data.stripeApiKey);
     }
     getStripeApiKey();
@@ -56,6 +61,11 @@ function App() {
             component={ConfirmOrder}
             exact
           />
+          {stripeApiKey && (
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtectedRoute path="/payment" component={Payment} />
+            </Elements>
+          )}
           <ProtectedRoute
             path="/password/update"
             component={UpdatePassword}
