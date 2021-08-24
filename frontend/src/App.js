@@ -21,6 +21,7 @@ import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
+import OrderSuccess from "./components/cart/OrderSuccess";
 
 //Payment
 import { Elements } from "@stripe/react-stripe-js";
@@ -56,6 +57,7 @@ function App() {
           <ProtectedRoute path="/me" component={Profile} exact />
           <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
           <ProtectedRoute path="/shipping" component={Shipping} exact />
+          <ProtectedRoute path="/success" component={OrderSuccess} exact />
           <ProtectedRoute
             path="/order/confirm"
             component={ConfirmOrder}
