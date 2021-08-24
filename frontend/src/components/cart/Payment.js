@@ -4,6 +4,7 @@ import { useAlert } from "react-alert";
 
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
+import { createOrder, clearErrors } from "../../actions/orderActions";
 
 import {
   useStripe,
@@ -22,8 +23,19 @@ const Payment = ({ history }) => {
 
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const { error } = useSelector((state) => state.newOrder);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, alert, error]);
+
+  const order = {
+    orderItems: cartItems,
+    shippingInfo,
+  };
   const options = {
     style: {
       base: {
@@ -35,6 +47,12 @@ const Payment = ({ history }) => {
     },
   };
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  if (orderInfo) {
+    order.itemsPrice = orderInfo.itemsPrice;
+    order.shippingPrice = orderInfo.shippingPrice;
+    order.taxPrice = orderInfo.taxPrice;
+    order.totalPrice = orderInfo.totalPrice;
+  }
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice),
   };
@@ -70,7 +88,13 @@ const Payment = ({ history }) => {
       } else {
         //The payment is processed or not
         if (result.paymentIntent.status === "succeeded") {
-          //ToDo : New order
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+          dispatch(createOrder(order));
+
           history.push("/success");
         } else {
           alert.error("There is some issues while processing Payment");
